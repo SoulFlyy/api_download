@@ -1,0 +1,24 @@
+'Use strict'
+
+function UrlParser(){}
+
+//Função que destrinxa os parêmetros GET da url, e retorda um JSON osganizado com todas as chaves e valores.
+UrlParser.prototype.getParams = (url) => {
+
+    var params = {};
+    
+    if(url.includes("?")) {
+        var parametroBase = url.split("?")[1];
+        var baseDividida = parametroBase.split("&");
+        for (var i = 0; i < baseDividida.length; i++){
+            var sup = baseDividida[i].split("=");
+            var key = sup[0];
+            var value = sup[1];
+            params[key] = value;
+        }
+    }
+
+    return params;l
+}
+
+module.exports = new UrlParser();

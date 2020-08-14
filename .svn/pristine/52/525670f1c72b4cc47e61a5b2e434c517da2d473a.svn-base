@@ -1,0 +1,19 @@
+'Use strict'
+
+const fs = require('fs');
+
+module.exports = {
+    
+    showFiles: (req, res) => {
+        fs.readdir("./", function(err, files) {
+            if(err) {
+                res.writeHead(404, {'Content-type':'application/json'})
+                res.end("{'menssagem': 'Diretorio inexistente'}"); 
+            } else {
+                var jFile = JSON.stringify(files);
+                res.writeHead(200, {'Content-type':'application/json'})
+                res.end(jFile);
+            }
+        });
+    }
+}

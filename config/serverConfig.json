@@ -1,0 +1,6 @@
+{
+    "port": "8080",    
+    "routerDir": "../../../base/",    
+    "protocol": "https",
+    "fileType": ".zip"
+}

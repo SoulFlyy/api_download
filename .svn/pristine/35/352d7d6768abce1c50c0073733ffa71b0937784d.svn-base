@@ -1,0 +1,25 @@
+'use strict'
+
+const https = require('https');
+const fs = require ('fs');
+const router = require('./router');
+
+const options = {
+    key: fs.readFileSync('./TLS/key.pem'),
+    cert: fs.readFileSync('./TLS/cert.pem'),
+    ca: fs.readFileSync('./TLS/client-cert.pem'),
+    passphrase: 'cthulhuerei',
+    requestCert: true,
+    rejectUnauthorized: true
+};
+
+var server = https.createServer(options, (req, res) => {
+
+    //Eavia os parâmetros para que a rota sejá validada.
+    router.handle(req, res);
+    
+});
+
+server.listen(8080);
+
+

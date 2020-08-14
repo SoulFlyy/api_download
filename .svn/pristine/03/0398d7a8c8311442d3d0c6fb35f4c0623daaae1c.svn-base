@@ -1,0 +1,73 @@
+'use strict'
+
+const baseToken = require('../json/token');
+
+function Validator(){}
+
+//Função para validar a existencio de um parâmetro X dentro do JSON.
+Validator.prototype.hasParameter = (obj, prmt) => {
+    if(obj.hasOwnProperty(prmt)){
+        return false;
+    }
+    return true;
+}
+
+//Função para ver se o token informado é valido
+Validator.prototype.tokenValidator = (token) => {
+    for(var propt in baseToken){
+        if(baseToken[propt] === token){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+// Validator.prototype.maxDay = (mouth, year) => {
+//     if(mouth == )
+// }
+
+//Função que confirma a validade da data enviada.
+Validator.prototype.dataValidator = (data) => {
+
+    const baseDate = new Date();
+    const max = new Validator();
+
+    if(data.length != 10) {
+        return false;
+    }
+    
+    if(!(data.includes("-"))) {
+        return false;
+    }
+    
+    var mask = data.split("-");
+
+    if(mask.length !== 3) {
+        return false;
+    }
+    
+    var year = mask[0];
+    var month = mask[1];
+    var day = mask[2];
+
+    if(year.length !== 4) {
+        return false;
+    }
+
+    if(month.length !== 2) {
+        return false;
+    }
+
+    if(day.length !== 2) {
+        return false;
+    }
+
+    if(year > baseDate.getFullYear()) {
+        return false;
+    }
+
+    return true;
+}
+
+module.exports = new Validator();
